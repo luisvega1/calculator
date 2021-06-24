@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+}
+
+code {
+  font-family: "Raleway", sans-serif;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.main-container .calculator {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  padding: 15px;
+  border: solid 1px #e4e4e4;
+  background-color: #ffffff;
+  -webkit-box-shadow: 5px 5px 10px 1px rgba(228, 228, 228, 0.65);
+  box-shadow: 5px 5px 10px 1px rgba(228, 228, 228, 0.65);
+}
+
+.main-container .calculator .from,
+.main-container .calculator .to {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-container .title {
+  color: #00468c;
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: 50px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+}
+.inputs .input,
+.inputs .moneda,
+.inputs .unidad {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  margin: 0 10px;
+}
+
+.inputs label {
+  color: #6c6c6c;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.inputs input,
+.inputs select {
+  border-radius: 5px;
+  border: solid 1px #b1b1b1;
+  padding: 14.2px 14.5px 14.8px 15.8px;
+  font-size: 18px;
+  color: #4d4d4d;
+}
+
+.inputs input{
+  width: 140px;
+}
+
+.inputs select{
+  width: 190px;
+}

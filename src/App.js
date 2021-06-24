@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Inputs from "./components/Inputs";
 import InputsConverted from "./components/InputsConverted";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 import { publicUnits, divisas, getUnitConvert } from "./helpers/tables";
 import { getConversion } from "./helpers/services";
 
@@ -36,13 +38,17 @@ const App = () => {
   //SE EJECUTA CADA QUE SE CAMBIA EL INPUT DE DIVISAS DEL CONVERTIDOR DE:
   const getSelectedDivisa = (ev, component) => {
     component == "from" ? setCurrentDivisa(ev) : setCurrentToDivisa(ev);
-    component == "from" ? convert(ev, currentToDivisa, toConvert, currentUnidad, currentToUnidad) : convert(currentDivisa, ev, toConvert, currentUnidad, currentToUnidad);
+    component == "from"
+      ? convert(ev, currentToDivisa, toConvert, currentUnidad, currentToUnidad)
+      : convert(currentDivisa, ev, toConvert, currentUnidad, currentToUnidad);
   };
 
   //SE EJECUTA CADA QUE SE CAMBIA EL INPUT DE UNIDADES DEL CONVERTIDOR DE:
   const getUnity = (ev, component) => {
     component == "from" ? setCurrentUnidad(ev) : setCurrentToUnidad(ev);
-    component == "from" ? convert(currentDivisa, currentToDivisa, toConvert, ev, currentToUnidad) : convert(currentDivisa, currentToDivisa, toConvert, currentUnidad, ev);
+    component == "from"
+      ? convert(currentDivisa, currentToDivisa, toConvert, ev, currentToUnidad)
+      : convert(currentDivisa, currentToDivisa, toConvert, currentUnidad, ev);
   };
 
   //SE EJECUTA CADA QUE SE CAMBIA EL INPUT DE CANTIDAD DEL CONVERTIDOR DE:
@@ -51,40 +57,56 @@ const App = () => {
     convert(currentDivisa, currentToDivisa, ev, currentUnidad, currentToUnidad);
   };
 
-  const convert = async (curDivisa, curToDivisa, qtyToConvert, curUnity, curToUnity) => {
-    const data = await getConversion(curDivisa, curToDivisa, qtyToConvert, curUnity, curToUnity);
+  const convert = async (
+    curDivisa,
+    curToDivisa,
+    qtyToConvert,
+    curUnity,
+    curToUnity
+  ) => {
+    const data = await getConversion(
+      curDivisa,
+      curToDivisa,
+      qtyToConvert,
+      curUnity,
+      curToUnity
+    );
     const totalConvertido = data.rates[curToDivisa].rate_for_amount;
 
     const unitToConvertValue = await getUnitConvert(curUnity, curToUnity);
-    const total = (totalConvertido / unitToConvertValue);
+    const total = totalConvertido / unitToConvertValue;
     setTotal(total);
   };
 
   return (
-    <div className="main-container">
-      <div className="calculator">
-        <div className="from">
-          <h1 className="title">Convertidor de:</h1>
-          <Inputs
-            divisas={divisasList}
-            units={units}
-            selectedDivisa={getSelectedDivisa}
-            selectedUnity={getUnity}
-            quantityToConver={getQuantityToConvert}
-          />
-        </div>
-        <div className="to">
-          <h1 className="title">Convertidor a:</h1>
-          <InputsConverted
-            divisas={divisasList}
-            units={units}
-            total={total}
-            selectedDivisa={getSelectedDivisa}
-            selectedUnity={getUnity}
-          />
+    <section>
+      <Header />
+      <div className="main-container">
+        <div className="calculator">
+          <div className="from">
+            <h1 className="title">Convertidor de:</h1>
+            <Inputs
+              divisas={divisasList}
+              units={units}
+              selectedDivisa={getSelectedDivisa}
+              selectedUnity={getUnity}
+              quantityToConver={getQuantityToConvert}
+            />
+          </div>
+          <div className="to">
+            <h1 className="title">Convertidor a:</h1>
+            <InputsConverted
+              divisas={divisasList}
+              units={units}
+              total={total}
+              selectedDivisa={getSelectedDivisa}
+              selectedUnity={getUnity}
+            />
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </section>
   );
 };
 
